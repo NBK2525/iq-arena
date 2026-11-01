@@ -239,11 +239,6 @@ header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-betw
       <button class="btn primary big" id="startBtn">ゲームを始める</button>
     </div>
     <div class="diffnote" id="diffNote"></div>
-    <div class="codebox">
-      <input id="codeIn" aria-label="問題コード" placeholder="問題コード（例 IQ-N-1A2B3C）" spellcheck="false">
-      <button class="btn" id="codeBtn">このコードで始める</button>
-    </div>
-    <div class="diffnote" id="codeMsg"></div>
     <div class="rank" id="titleRank" hidden>
       <h3>ランキング <span class="seg" id="rankSeg" role="group" aria-label="ランキングの難易度"></span></h3>
       <ol id="titleRankList"></ol>
@@ -298,9 +293,7 @@ header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-betw
     </table></div>
     <div class="resrow">
       <button class="btn primary big" id="againNew">新しい問題で遊ぶ</button>
-      <button class="btn" id="againSame">同じ問題でもう一度</button>
       <button class="btn" id="toTitle">タイトルへ</button>
-      <span class="code" id="resCode"></span>
     </div>
     <div class="submit" id="submitBox" hidden>
       <input id="nickIn" maxlength="12" placeholder="ニックネーム（12文字まで）" aria-label="ニックネーム" autocomplete="nickname">
@@ -928,10 +921,8 @@ function drawDiff(){const el=$("diffSeg");el.innerHTML="";DIFFS.forEach(([v,l])=
   const best=parseFloat(store(`iqa-total-${game.diff}`));$("diffNote").textContent=DIFF_NOTE[game.diff]+(isNaN(best)?"":`　自己ベスト ${fmtL(best)}`);}
 drawDiff();
 const codeOf=()=>`IQ-${DL[game.diff]}-${(game.seed>>>0).toString(36).toUpperCase()}`;
-function startGame(seed){game.seed=seed!==undefined?seed:(Math.random()*4294967296)>>>0;game.idx=0;game.results=[];beginStage();}
+function startGame(){game.seed=(Math.random()*4294967296)>>>0;game.idx=0;game.results=[];beginStage();}
 $("startBtn").onclick=()=>startGame();
-$("codeBtn").onclick=()=>{const m=$("codeIn").value.trim().toUpperCase().match(/^IQ-([ENH])-([0-9A-Z]+)$/);
-  if(!m){$("codeMsg").textContent="コードの形式は IQ-N-1A2B3C です";return;}game.diff={E:"easy",N:"normal",H:"hard"}[m[1]];drawDiff();startGame(parseInt(m[2],36)>>>0);};
 
 /* ===== ルール紹介 ===== */
 let introStep=0,prepared=null;
@@ -991,9 +982,8 @@ function finish(){cur=null;drawTrack();show("scrResult");
   $("resBest").textContent=`${DIFF_JA[game.diff]}　${bestTxt}`;
   $("resBody").innerHTML=STAGES.map((s,i)=>{const r=game.results[i];
     return`<tr><td>STAGE ${i+1}</td><td>${s.name}<br><small style="color:var(--muted)">${s.skill}</small></td><td>${r.pass?`${r.raw.toFixed(1)} 秒 ＋ ${PASS_PENALTY}`:r.summary}</td><td><span class="pill ${r.pass?"ng":"ok"}">${r.pass?"パス":"クリア"}</span></td><td class="t">${fmtL(r.time)}</td></tr>`;}).join("");
-  $("resCode").textContent=`問題コード ${codeOf()}`;setupSubmit(allClear);}
+  setupSubmit(allClear);}
 $("againNew").onclick=()=>startGame();
-$("againSame").onclick=()=>startGame(game.seed);
 $("toTitle").onclick=()=>{drawDiff();show("scrTitle");showTitleRank();};
 
 
