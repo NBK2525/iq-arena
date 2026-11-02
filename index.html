@@ -215,6 +215,70 @@ header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-betw
 .submit input{flex:1;min-width:140px;font:700 15px var(--f-body);padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
 .submit .st{flex-basis:100%;font-size:14px;color:var(--muted);min-height:1.4em}
 .submit .st.ok{color:var(--good);font-weight:700}.submit .st.ng{color:var(--bad)}
+
+/* 結果の演出 */
+.reveal{position:relative}
+.scan{display:flex;flex-direction:column;align-items:center;gap:12px;padding:60px 0}
+.scan .k{font-size:13px;letter-spacing:.3em}
+.scanbar{width:min(320px,80%);height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.scanbar i{display:block;height:100%;width:30%;background:var(--accent);border-radius:3px;animation:scan 1s ease-in-out infinite alternate}
+@keyframes scan{from{transform:translateX(-10%)}to{transform:translateX(240%)}}
+.iqhero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(16px,4vw,40px);align-items:center}
+@media (max-width:760px){.iqhero{grid-template-columns:minmax(0,1fr)}}
+.iqbox{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.iqlabel{font:700 18px var(--f-body);margin-top:6px}
+.iqnum.time{font-size:clamp(64px,14vw,112px);color:var(--ink)}
+.iqnum{font:700 clamp(96px,22vw,168px)/.95 var(--f-display);font-variant-numeric:tabular-nums;color:var(--accent);letter-spacing:-.02em}
+.badge{font:700 clamp(18px,3.4vw,24px) var(--f-body);padding:4px 16px;border-radius:999px;background:var(--ink);color:var(--board);opacity:0;transform:scale(1.6) rotate(-6deg)}
+.badge.on{animation:stamp .45s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes stamp{to{opacity:1;transform:scale(1) rotate(-3deg)}}
+.pct{color:var(--muted);font-weight:700;min-height:1.6em}
+.iqbox .total{margin:10px 0 0;display:flex;gap:8px 14px;align-items:baseline;flex-wrap:wrap}
+.iqbox .total b{font:700 clamp(26px,5vw,36px)/1 var(--f-display);font-variant-numeric:tabular-nums}
+.iqbox .total span{color:var(--muted);font-size:13px}
+.radar svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto;overflow:visible}
+.radar .poly{transition:all .5s ease-out}
+.skip{position:absolute;top:0;right:0;font-size:12px;padding:6px 10px;color:var(--muted)}
+#confetti{position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);pointer-events:none}
+.after{margin-top:26px;transition:opacity .5s}
+.after.hide{opacity:0;pointer-events:none;visibility:hidden}
+.restable table.noiq thead th:nth-child(4),.restable table.noiq tbody td:nth-child(4),.restable table.noiq .iqf{display:none}
+.restable td.iq{font:700 18px var(--f-display);text-align:right;color:var(--accent)}
+.rank .iqc{font:600 13px var(--f-display);color:var(--accent);margin-right:10px}
+
+/* フッター */
+.site-foot{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:center;color:var(--muted);font-size:13px;padding:8px 0 4px;text-align:center}
+.site-foot a{color:var(--accent);font-weight:700;text-decoration:none}
+.site-foot a:hover{text-decoration:underline}
+.site-foot .maker b{color:var(--ink)}
+.site-foot .pr{flex-basis:100%;display:flex;flex-direction:column;gap:10px;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.site-foot .pr .tag{font:700 10px var(--f-display);letter-spacing:.12em;border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.pr-wide,.pr-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
+.pr-item{max-width:100%;line-height:0}
+.pr-item img{max-width:100%;height:auto;border-radius:6px}
+.pr-item img.px{position:absolute;width:1px;height:1px;opacity:0}
+a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.btn.x{background:var(--ink);color:var(--board);border-color:var(--ink)}
+
+/* 製作者カード（ゲーム全体のトークンに合わせる） */
+.maker-card{flex-basis:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(16px,4vw,32px);align-items:center;text-align:left;
+  background:linear-gradient(120deg,var(--surface) 55%,var(--accent-soft));
+  border:2px solid var(--accent);border-radius:14px;padding:clamp(18px,4vw,30px) clamp(18px,4vw,34px);color:var(--ink);margin-bottom:6px}
+@media (max-width:560px){.maker-card{grid-template-columns:minmax(0,1fr);justify-items:start}}
+.maker-avatar{width:clamp(96px,16vw,128px);aspect-ratio:1;max-width:100%;border-radius:50%;border:5px solid var(--accent);box-shadow:0 0 0 7px var(--accent-soft);
+  display:flex;align-items:center;justify-content:center;background:var(--board)}
+.maker-avatar span{font:700 clamp(18px,3.4vw,24px) var(--f-body);color:var(--accent);letter-spacing:.04em}
+.maker-body{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.maker-badge{font:700 12px var(--f-display);letter-spacing:.12em;background:var(--accent);color:var(--board);padding:2px 10px;border-radius:4px}
+.maker-card h2{font:700 clamp(24px,5vw,34px)/1.2 var(--f-body);margin:2px 0;color:var(--ink);text-wrap:balance}
+.maker-card p{margin:0;color:var(--muted);font-size:clamp(13px,2.2vw,15px);line-height:1.8;max-width:60ch}
+.maker-card p b{color:var(--accent)}
+.site-foot a.maker-btn{color:var(--board);text-decoration:none}
+.maker-btn{display:inline-flex;align-items:center;gap:10px;margin-top:8px;background:var(--accent);color:var(--board);text-decoration:none;font:700 clamp(14px,2.4vw,16px) var(--f-body);padding:12px 22px;border-radius:999px;transition:transform .12s}
+.maker-btn:hover{transform:translateY(-1px)}
+.maker-btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.maker-btn svg{width:18px;height:18px;fill:currentColor}
+.maker-name{font-size:12px;color:var(--muted);margin-top:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script src="config.js"></script>
@@ -284,16 +348,34 @@ header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-betw
 
   <!-- 結果 -->
   <section class="panelcard result" id="scrResult" hidden>
-    <h2 id="resTitle">FINISH</h2>
-    <div class="total"><b id="resTotal">0.0</b><span>合計タイム</span><span id="resBest"></span></div>
-    <div class="restable"><table>
-      <thead><tr><th>ステージ</th><th>種目</th><th>内容</th><th>結果</th><th class="t">タイム</th></tr></thead>
+    <div class="reveal" id="reveal">
+      <div class="scan" id="scan"><span class="k">計測中</span><div class="scanbar"><i></i></div></div>
+      <div class="iqhero" id="iqHero">
+        <div class="iqbox">
+          <div class="k" id="resTitle">全ステージクリア</div>
+          <div class="iqlabel" id="iqLabel">総合IQ</div>
+          <div class="iqnum" id="iqNum">?</div>
+          <div class="badge" id="iqBadge"></div>
+          <div class="pct" id="iqPct"></div>
+          <div class="total" id="iqTotalLine"><b id="resTotal">0.0</b><span id="resBest"></span></div>
+        </div>
+        <div class="radar" id="radarBox"><svg id="radar" viewBox="0 0 320 300" aria-label="能力別IQのレーダーチャート"></svg></div>
+      </div>
+      <button class="btn skip" id="skipBtn">演出をスキップ</button>
+      <canvas id="confetti" aria-hidden="true"></canvas>
+    </div>
+    <div class="after" id="afterReveal">
+    <div class="restable"><table id="resTable">
+      <thead><tr><th>ステージ</th><th>種目</th><th>内容</th><th class="t">IQ</th><th class="t">タイム</th></tr></thead>
       <tbody id="resBody"></tbody>
-      <tfoot><tr><td colspan="4">合計</td><td class="t" id="resFoot"></td></tr></tfoot>
+      <tfoot><tr><td colspan="3">合計</td><td class="t iqf" id="resIqFoot"></td><td class="t" id="resFoot"></td></tr></tfoot>
     </table></div>
     <div class="resrow">
       <button class="btn primary big" id="againNew">新しい問題で遊ぶ</button>
       <button class="btn" id="toTitle">タイトルへ</button>
+      <button class="btn" id="copyBtn">結果をコピー</button>
+      <a class="btn x" id="xBtn" href="https://x.com/nobi_nobita_fx" target="_blank" rel="noopener">Xで感想を送る</a>
+      <span class="code" id="copySt"></span>
     </div>
     <div class="submit" id="submitBox" hidden>
       <input id="nickIn" maxlength="12" placeholder="ニックネーム（12文字まで）" aria-label="ニックネーム" autocomplete="nickname">
@@ -304,7 +386,21 @@ header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-betw
       <h3 id="resRankH">ランキング</h3>
       <ol id="resRankList"></ol>
     </div>
+    </div>
   </section>
+  <footer class="site-foot" id="siteFoot">
+    <section class="maker-card" aria-labelledby="makerH">
+      <div class="maker-avatar" aria-hidden="true"><span>のびけ</span></div>
+      <div class="maker-body">
+        <span class="maker-badge">FEEDBACK</span>
+        <h2 id="makerH">ご意見・ご要望、募集中！</h2>
+        <p>「この問題がむずかしすぎる」「こんなステージがほしい」「IQが低く出すぎる」など、なんでも送ってください。<br>いただいた声をもとに、<b>IQ ARENA</b> をアップデートしていきます。</p>
+        <a class="maker-btn" href="https://x.com/nobi_nobita_fx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L1.9 3h6.4l4.4 5.9L17.8 3Zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5Z"/></svg>@nobi_nobita_fx にDMで連絡</a>
+        <div class="maker-name">製作：のびけ</div>
+      </div>
+    </section>
+    <div class="pr" id="prBox" hidden></div>
+  </footer>
 </div>
 
 <script>
@@ -598,15 +694,16 @@ const L1=LIB1(),L2=LIB2(),L3=LIB3(),L4=LIB4(),L5=LIB5();
 const $=id=>document.getElementById(id);
 const PAL=["#E5484D","#2F6FEB","#E0A100"];
 const DIFFS=[["easy","やさしい"],["normal","ふつう"],["hard","むずかしい"]];
+const HAS_IQ=d=>d==="normal"; // 総合IQは「ふつう」だけで計測する
 const DIFF_JA={easy:"やさしい",normal:"ふつう",hard:"むずかしい"},DL={easy:"E",normal:"N",hard:"H"};
-const DIFF_NOTE={easy:"はじめての人向け。盤面が小さく、法則も1つだけ。",normal:"標準。5ステージ合わせて3〜5分が目安。",hard:"上級者向け。盤面が大きく、ひっかけも増える。"};
+const DIFF_NOTE={easy:"はじめての人向け。盤面が小さく、法則も1つだけ。練習用（IQは計測しない）。",normal:"総合IQを計測できるのはこの難易度だけ。5ステージで2〜3分が目安。",hard:"上級者向け。盤面が大きく、ひっかけも増える。タイムだけを競う（IQは計測しない）。"};
 const PASS_PENALTY=60;
 function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
 const fmtL=s=>s<60?`${s.toFixed(1)}秒`:`${Math.floor(s/60)}分${(s%60).toFixed(1)}秒`;
 const fmtT=s=>s<60?s.toFixed(1):`${Math.floor(s/60)}:${(s%60).toFixed(1).padStart(4,"0")}`;
 function stageSeed(seed,k){let x=(seed^Math.imul(k+1,0x9E3779B1))>>>0;x=Math.imul(x^(x>>>16),0x45d9f3b)>>>0;return (x^(x>>>16))>>>0;}
 
-let game={diff:"normal",seed:0,idx:0,results:[],stageStart:0,running:false};
+let game={diff:"normal",seed:0,idx:0,results:[],stageStart:0,running:false,pausedAt:null,pausedTotal:0,penalty:0};
 let cur=null,ctxTimers=[],introTimer=null,tick=null,preparing=null;
 function later(fn,ms){const t=setTimeout(fn,ms);ctxTimers.push(t);return t;}
 function clearLater(){ctxTimers.forEach(clearTimeout);ctxTimers=[];}
@@ -727,9 +824,9 @@ const S2={key:"number",name:"MAKE NUMBER",skill:"計算",
   op(o){if(this.busy)return;if(this.wantCard()){setMsg(this.used.length?"次はカードを選んでください":"最初はカードを選んでください","bad");this.shake();return;}this.ops.push(o);this.after();},
   after(){const q=this.qs[this.qi];
     if(this.used.length===3){const r=L2.validate(q,this.used,this.ops);
-      if(r.ok){this.busy=true;this.render();setMsg(`正解！ = ${q.goal}`,"good");
+      if(r.ok){pauseClock();this.busy=true;this.render();setMsg(`正解！ = ${q.goal}`,"good");
         if(this.qi+1>=this.qs.length){later(()=>stageClear(`誤答 ${this.wrong}`),600);return;}
-        later(()=>{this.qi++;this.used=[];this.ops=[];this.busy=false;setPhase(`<span class="p">問題 ${this.qi+1} / ${S2_Q}　目標の数を作る</span>`);setMsg("");this.render();},700);return;}
+        later(()=>{this.qi++;this.used=[];this.ops=[];this.busy=false;setPhase(`<span class="p">問題 ${this.qi+1} / ${S2_Q}　目標の数を作る</span>`);setMsg("");this.render();resumeClock();},700);return;}
       this.wrong++;this.render();setMsg(r.v?`${fmtV(r.v)} になりました。目標は ${q.goal}`:r.reason,"bad");this.shake();return;}
     setMsg("");this.render();},
   undo(){if(this.busy)return;if(this.used.length>this.ops.length)this.used.pop();else if(this.ops.length)this.ops.pop();this.render();},
@@ -771,6 +868,7 @@ function shapeSVG(sh,x,y,r,col,fill,pat){
   if(sh===1)return`<rect x="${x-r*.88}" y="${y-r*.88}" width="${r*1.76}" height="${r*1.76}" rx="2" ${st}/>`;
   return`<polygon points="${x},${y-r*1.08} ${x+r*1.05},${y+r*.78} ${x-r*1.05},${y+r*.78}" ${st} stroke-linejoin="round"/>`;
 }
+const S3_PEN=3,S5_PEN=5;
 const TYPE_JA={remove:"消えた",add:"増えた",color:"色が変わった",shape:"形が変わった",move:"移動した",swap:"入れ替わった"};
 function miniGrid(items,hl){const n=3,S=70,P=6;let h=`<svg viewBox="0 0 ${n*S+P*2} ${n*S+P*2}"><rect x="${P}" y="${P}" width="${n*S}" height="${n*S}" rx="4" fill="var(--board)"/>`;
   for(let i=1;i<n;i++)h+=`<line x1="${P+i*S}" y1="${P}" x2="${P+i*S}" y2="${P+n*S}" stroke="var(--line)" stroke-width="1.5"/><line x1="${P}" y1="${P+i*S}" x2="${P+n*S}" y2="${P+i*S}" stroke="var(--line)" stroke-width="1.5"/>`;
@@ -782,7 +880,7 @@ const S3={key:"change",name:"何が変わった？",skill:"記憶",
     {t:"図形の並んだ盤面が数秒だけ表示される。位置・形・色を覚える。"},
     {t:"盤面が一瞬消える。"},
     {t:"もう一度表示されたとき、1か所だけ変わっている。そのマスをタップする。"},
-    {t:"間違えても次の問題へ進む。3問正解でクリア。"}],
+    {t:"覚えている時間は計らない。タップの速さだけを計る。間違えると＋3秒して次の問題へ。3問正解でクリア。"}],
   ill(step){const A=[{shape:0,color:0},null,{shape:2,color:1},null,{shape:1,color:2},null,null,null,{shape:0,color:1}];
     if(step===0)return miniGrid(A);if(step===1)return miniGrid([null,null,null,null,null,null,null,null,null]);
     const B=A.slice();B[4]=null;B[5]={shape:1,color:2};
@@ -794,15 +892,15 @@ const S3={key:"change",name:"何が変わった？",skill:"記憶",
       const x=(e.clientX-r.left)*W/r.width-8,y=(e.clientY-r.top)*W/r.height-8;if(x<0||y<0||x>=n*80||y>=n*80)return;e.preventDefault();this.tap(((y/80)|0)*n+((x/80)|0));});
     this.render();},
   start(){this.run();},
-  run(){const q=this.qs[this.qi];this.tapped=null;this.status="look";this.view=q.before;this.render();
+  run(){pauseClock();const q=this.qs[this.qi];this.tapped=null;this.status="look";this.view=q.before;this.render();
     setPhase(`<span class="p look">問題 ${this.qi+1}　覚えて</span><span class="tbar"><i id="tb3"></i></span>`);setMsg("位置・形・色を覚える。");
     try{$("tb3").animate([{width:"100%"},{width:"0%"}],{duration:q.look,easing:"linear",fill:"forwards"});}catch(e){}
     later(()=>{this.status="mask";this.view="mask";this.render();setPhase(`<span class="p">……</span>`);
-      later(()=>{this.status="find";this.view=q.after;this.render();setPhase(`<span class="p find">変わったところをタップ</span>`);setMsg("変わったマスをタップする。");},700);},q.look);},
-  tap(c){const q=this.qs[this.qi],ok=L3.validate(q,c);this.tapped=c;this.res.push(ok);this.status="result";
-    setPhase(`<span class="p ${ok?"ok":"ng"}">${ok?"正解！":"ちがう"}　${TYPE_JA[q.type]}</span>`);setMsg(ok?`正解。${TYPE_JA[q.type]}`:`正解は緑の枠。「${TYPE_JA[q.type]}」`,ok?"good":"bad");this.render();
+      later(()=>{resumeClock();this.status="find";this.view=q.after;this.render();setPhase(`<span class="p find">変わったところをタップ</span>`);setMsg("変わったマスをタップする。");},700);},q.look);},
+  tap(c){pauseClock();const q=this.qs[this.qi],ok=L3.validate(q,c);if(!ok)addPenalty(S3_PEN);this.tapped=c;this.res.push(ok);this.status="result";
+    setPhase(`<span class="p ${ok?"ok":"ng"}">${ok?"正解！":"ちがう"}　${TYPE_JA[q.type]}</span>`);setMsg(ok?`正解。${TYPE_JA[q.type]}`:`＋${S3_PEN}秒。正解は緑の枠。「${TYPE_JA[q.type]}」`,ok?"good":"bad");this.render();
     const got=this.res.filter(Boolean).length;
-    if(got>=3){later(()=>stageClear(`${this.res.length}問中3問正解`),900);return;}
+    if(got>=3){const m=this.res.length-3;later(()=>stageClear(`${this.res.length}問中3問正解${m?`（ミス ＋${m*S3_PEN}秒）`:""}`),900);return;}
     const nx=()=>{this.qi++;if(this.qi>=this.qs.length){passStage();return;}this.run();};
     if(!ok){this.view=q.before;this.render();later(()=>{this.view=q.after;this.render();later(nx,900);},900);return;}
     later(nx,800);},
@@ -870,18 +968,18 @@ const S5={key:"matrix",name:"図形マトリックス",skill:"推理",
     {t:"3×3のマスに図形が並んでいる。右下だけが ？ になっている。"},
     {t:"形・個数・色・塗りは、横の行や縦の列ごとに法則どおりに並んでいる。例：個数は上から1・2・3、色はどの行にも3色が1つずつ。"},
     {t:"法則に合う図形を、8つの選択肢から選ぶ。"},
-    {t:"間違えると法則が表示され、次の問題へ。3問正解でクリア。"}],
+    {t:"答え合わせの間は時計が止まる。間違えると＋5秒、法則が表示されて次の問題へ。3問正解でクリア。"}],
   ill(step){return miniMatrix(step);},
   prepare(diff,seed){return Promise.resolve(L5.makeStage({seed,diff,max:30}));},
   mount(r){this.qs=r.questions;this.qi=0;this.res=[];this.status="idle";this.picked=-1;
     $("stageBody").innerHTML=`<div style="display:flex;flex-direction:column;gap:12px"><div class="boardbox"><svg class="board mx" id="b5" xmlns="http://www.w3.org/2000/svg" aria-label="3×3の図形マトリックス"></svg></div><div class="opts" id="op5"></div><div class="explain" id="ex5">？に入る図形を、下の8つから選ぶ。</div></div>`;
     this.render();},
   start(){this.run();},
-  run(){this.status="play";this.picked=-1;setPhase(`<span class="p">問題 ${this.qi+1}　？に入るのは？</span>`);setMsg("横の行・縦の列の並び方に注目する。");$("ex5").textContent="？に入る図形を、下の8つから選ぶ。";this.render();},
-  choose(i){if(this.status!=="play")return;const q=this.qs[this.qi],ok=L5.validate(q,i);this.picked=i;this.res.push(ok);this.status="result";
-    setPhase(`<span class="p ${ok?"ok":"ng"}">${ok?"正解！":"ちがう"}</span>`);setMsg(ok?"正解":"正解は緑の枠の図形",ok?"good":"bad");
+  run(){resumeClock();this.status="play";this.picked=-1;setPhase(`<span class="p">問題 ${this.qi+1}　？に入るのは？</span>`);setMsg("横の行・縦の列の並び方に注目する。");$("ex5").textContent="？に入る図形を、下の8つから選ぶ。";this.render();},
+  choose(i){if(this.status!=="play")return;pauseClock();const q=this.qs[this.qi],ok=L5.validate(q,i);if(!ok)addPenalty(S5_PEN);this.picked=i;this.res.push(ok);this.status="result";
+    setPhase(`<span class="p ${ok?"ok":"ng"}">${ok?"正解！":"ちがう"}</span>`);setMsg(ok?"正解":`＋${S5_PEN}秒。正解は緑の枠の図形`,ok?"good":"bad");
     $("ex5").innerHTML=`<b>この問題の法則</b><ul>${q.descs.map(d=>`<li>${d}</li>`).join("")}<li>それ以外の特徴：すべて同じ</li></ul>`;this.render();
-    if(this.res.filter(Boolean).length>=3){later(()=>stageClear(`${this.res.length}問中3問正解`),1200);return;}
+    if(this.res.filter(Boolean).length>=3){const m=this.res.length-3;later(()=>stageClear(`${this.res.length}問中3問正解${m?`（ミス ＋${m*S5_PEN}秒）`:""}`),1200);return;}
     later(()=>{this.qi++;if(this.qi>=this.qs.length){passStage();return;}this.run();},ok?1400:3200);},
   actions(){return[];},keys:"1〜8 で選択肢を選ぶ",
   onKey(e){if(/^[1-8]$/.test(e.key)){e.preventDefault();this.choose(+e.key-1);}},
@@ -900,8 +998,9 @@ const S5={key:"matrix",name:"図形マトリックス",skill:"推理",
 
 const STAGES=[S1,S2,S3,S4,S5];
 
+
 /* ===== 画面の切り替え ===== */
-function show(id){["scrTitle","scrIntro","scrPlay","scrResult"].forEach(s=>$(s).hidden=s!==id);$("hdr").hidden=id==="scrTitle";window.scrollTo({top:0});}
+function show(id){["scrTitle","scrIntro","scrPlay","scrResult"].forEach(s=>$(s).hidden=s!==id);$("siteFoot").hidden=!(id==="scrTitle"||id==="scrResult");if(typeof PR_ON!=="undefined")$("prBox").hidden=!PR_ON||!(id==="scrTitle"||id==="scrResult");$("hdr").hidden=id==="scrTitle";window.scrollTo({top:0});}
 function setPhase(h){$("phase").innerHTML=h;}
 function setMsg(t,cls){const m=$("msg");m.textContent=t||"";m.className="msg"+(cls?" "+cls:"");}
 function setStat(k,v){$("statK").textContent=k;$("statV").innerHTML=v;}
@@ -917,7 +1016,7 @@ function armPass(b){if(!game.running)return;if(!passArmed){passArmed=true;b.text
 
 /* ===== タイトル ===== */
 $("stageList").innerHTML=STAGES.map((s,i)=>`<div><b>STAGE ${i+1}</b><strong>${s.name}</strong><small>${s.skill}</small></div>`).join("");
-function drawDiff(){const el=$("diffSeg");el.innerHTML="";DIFFS.forEach(([v,l])=>{const b=document.createElement("button");b.textContent=l;b.setAttribute("aria-pressed",String(game.diff===v));b.onclick=()=>{game.diff=v;drawDiff();};el.appendChild(b);});
+function drawDiff(){const el=$("diffSeg");el.innerHTML="";DIFFS.forEach(([v,l])=>{const b=document.createElement("button");b.textContent=HAS_IQ(v)?l+"・IQ計測":l;b.setAttribute("aria-pressed",String(game.diff===v));b.onclick=()=>{game.diff=v;drawDiff();};el.appendChild(b);});
   const best=parseFloat(store(`iqa-total-${game.diff}`));$("diffNote").textContent=DIFF_NOTE[game.diff]+(isNaN(best)?"":`　自己ベスト ${fmtL(best)}`);}
 drawDiff();
 const codeOf=()=>`IQ-${DL[game.diff]}-${(game.seed>>>0).toString(36).toUpperCase()}`;
@@ -954,11 +1053,15 @@ $("replayBtn").onclick=()=>playIntro(0,true);
 function goPlay(){if(!prepared)return;clearTimeout(introTimer);show("scrPlay");drawTrack();
   cur.mount(prepared);setPhase(`<span class="p">STAGE ${game.idx+1}　${cur.name}</span>`);setMsg("");
   const ov=$("overlay");let c=3;
-  const step=()=>{if(c===0){ov.hidden=true;game.running=true;game.stageStart=performance.now();startTick();cur.start();refreshActions();return;}
+  const step=()=>{if(c===0){ov.hidden=true;game.running=true;game.stageStart=performance.now();game.pausedAt=null;game.pausedTotal=0;game.penalty=0;startTick();cur.start();refreshActions();return;}
     ov.innerHTML=`<div class="big">${c}</div><div class="sub">STAGE ${game.idx+1}　${cur.name}</div>`;ov.hidden=false;c--;later(step,650);};
   step();refreshActions();drawTimes();}
 const doneTime=()=>game.results.reduce((a,r)=>a+r.time,0);
-function stageElapsed(){return game.running?(performance.now()-game.stageStart)/1000:0;}
+function stageElapsed(){if(!game.running)return 0;const now=game.pausedAt!==null?game.pausedAt:performance.now();return (now-game.stageStart-game.pausedTotal)/1000+game.penalty;}
+/* ゲーム側が進行している時間（覚える時間・答え合わせの表示・問題の切り替え）は時計を止める */
+function pauseClock(){if(game.running&&game.pausedAt===null)game.pausedAt=performance.now();}
+function resumeClock(){if(game.pausedAt!==null){game.pausedTotal+=performance.now()-game.pausedAt;game.pausedAt=null;}}
+function addPenalty(sec){game.penalty+=sec;}
 function drawTimes(){const s=stageElapsed();$("tStage").textContent=fmtT(s);$("tTotal").textContent=fmtT(doneTime()+s);}
 function startTick(){stopTick();tick=setInterval(drawTimes,100);}
 function stopTick(){if(tick)clearInterval(tick);tick=null;}
@@ -973,16 +1076,128 @@ function passStage(){if(!game.running)return;const t=stageElapsed();game.running
 function nextStage(){$("overlay").hidden=true;game.idx++;if(game.idx>=STAGES.length){finish();return;}beginStage();}
 
 /* ===== 結果 ===== */
+/* 総合IQの推定モデル
+   各ステージのタイムを「標準的なプレイヤー」の分布（対数正規）と比べて z 値を出し、
+   IQ と同じ物差し（平均100・標準偏差15）に変換する。
+   基準値はテストプレイの想定。ランキングのデータが集まったら実測値に置き換える。 */
+const IQ_MODEL={
+  easy:  {med:[17,25,11,15,18],sd:[.5,.5,.5,.3,.45],offset:-8},
+  normal:{med:[34,38,13,30,30],sd:[.5,.5,.5,.3,.45],offset:0},
+  hard:  {med:[76,64,15,42,54],sd:[.5,.5,.5,.3,.45],offset:8}
+};
+const ABIL=["空間","計算","記憶","注意","推理"];
+function s3Floor(diff){const look=L3.DIFF[diff].look/1000;return 3*(look+0.7)+2*0.8;}
+function stageZ(diff,i,t){const M=IQ_MODEL[diff];const eff=Math.max(t,0.5);
+  return -(Math.log(eff)-Math.log(M.med[i]))/M.sd[i];}
+const clampIQ=v=>Math.round(Math.max(55,Math.min(160,v)));
+function computeIQ(diff,stageTimes,passFlags){
+  const M=IQ_MODEL[diff];
+  const z=stageTimes.map((t,i)=>passFlags&&passFlags[i]?-2.5:Math.max(-3,Math.min(4,stageZ(diff,i,t))));
+  const stageIQ=z.map(v=>clampIQ(100+M.offset+15*v));
+  const zt=z.reduce((a,b)=>a+b,0)/Math.sqrt(5+20*0.4);
+  return{total:clampIQ(100+M.offset+15*zt),stageIQ,zt};
+}
+function normCdf(x){const t=1/(1+0.2316419*Math.abs(x)),d=0.3989423*Math.exp(-x*x/2),p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return x>0?1-p:p;}
+function iqTitle(iq){return iq>=150?"伝説の頭脳":iq>=140?"天才":iq>=130?"MENSA級":iq>=120?"秀才":iq>=110?"切れ者":iq>=90?"標準":iq>=80?"のびしろ大":"ウォームアップ中";}
+function topPct(iq){const p=1-normCdf((iq-100)/15);if(iq<100)return`平均の100まで、あと ${100-iq}`;return p<0.001?"上位 0.1% 未満":`上位 ${(p*100)<10?(p*100).toFixed(1):Math.round(p*100)}%`;}
+
+function drawRadar(vals,shown){
+  const cx=160,cy=150,R=110,n=5,ang=i=>-Math.PI/2+i*2*Math.PI/n,rad=v=>R*Math.max(0,Math.min(1,(v-55)/(145-55)));
+  const pt=(i,r)=>[cx+r*Math.cos(ang(i)),cy+r*Math.sin(ang(i))];
+  let h="";
+  [70,100,130].forEach(v=>{h+=`<polygon points="${[...Array(n).keys()].map(i=>pt(i,rad(v)).join(",")).join(" ")}" fill="none" stroke="var(--line)" stroke-width="${v===100?1.6:1}" ${v===100?"":'stroke-dasharray="3 4"'}/>`;});
+  for(let i=0;i<n;i++){const [x,y]=pt(i,R);h+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--line)"/>`;}
+  [70,100,130].forEach(v=>{const [x,y]=pt(0,rad(v));h+=`<text x="${x+4}" y="${y+3}" font-size="9" fill="var(--muted)" font-family="Chakra Petch,sans-serif">${v}</text>`;});
+  const vs=vals.map((v,i)=>i<shown&&v!==null?v:55);
+  h+=`<polygon class="poly" points="${vs.map((v,i)=>pt(i,rad(v)).join(",")).join(" ")}" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>`;
+  vs.forEach((v,i)=>{if(i<shown){const [x,y]=pt(i,rad(v));h+=`<circle cx="${x}" cy="${y}" r="4.5" fill="var(--accent)" stroke="var(--board)" stroke-width="2"/>`;}});
+  for(let i=0;i<n;i++){const [x,y]=pt(i,R+26),anchor=Math.abs(x-cx)<5?"middle":x>cx?"start":"end";
+    h+=`<text x="${x}" y="${y-2}" text-anchor="${anchor}" font-size="13" font-weight="700" fill="var(--ink)" font-family="Zen Kaku Gothic New,sans-serif">${ABIL[i]}</text>`;
+    h+=`<text x="${x}" y="${y+14}" text-anchor="${anchor}" font-size="14" font-weight="700" fill="${i<shown?"var(--accent)":"var(--line)"}" font-family="Chakra Petch,sans-serif">${i<shown?(vals[i]===null?"—":vals[i]):"…"}</text>`;}
+  $("radar").innerHTML=h;
+}
+
+let revealTimers=[],revealDone=null;
+const rLater=(fn,ms)=>{const t=setTimeout(fn,ms);revealTimers.push(t);};
+function countUp(el,from,to,ms,done){const t0=performance.now();const step=now=>{const k=Math.min(1,(now-t0)/ms),e=1-Math.pow(1-k,3);el.textContent=Math.round(from+(to-from)*e);if(k<1)revealTimers.push(requestAnimationFrame(step));else if(done)done();};revealTimers.push(requestAnimationFrame(step));}
+function confetti(){
+  const cv=$("confetti"),ctx=cv.getContext&&cv.getContext("2d");if(!ctx)return;
+  const W=cv.width=cv.offsetWidth,H=cv.height=cv.offsetHeight,cols=["#2F55E0","#E0A100","#E5484D","#1E8657","#8E4EC6"];
+  const ps=[...Array(140)].map(()=>({x:W/2+(Math.random()-.5)*W*.3,y:H*.35,vx:(Math.random()-.5)*9,vy:-Math.random()*10-4,r:Math.random()*6+3,c:cols[(Math.random()*5)|0],a:Math.random()*6,va:(Math.random()-.5)*.3}));
+  const t0=performance.now();
+  const f=now=>{ctx.clearRect(0,0,W,H);const el=now-t0;ps.forEach(p=>{p.vy+=.28;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.a+=p.va;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.globalAlpha=Math.max(0,1-el/2600);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);ctx.restore();});
+    if(el<2600)revealTimers.push(requestAnimationFrame(f));else ctx.clearRect(0,0,W,H);};
+  revealTimers.push(requestAnimationFrame(f));
+}
 function finish(){cur=null;drawTrack();show("scrResult");
-  const total=doneTime(),passes=game.results.filter(r=>r.pass).length,allClear=passes===0;
-  $("resTitle").textContent=allClear?"ALL STAGES CLEAR":"FINISH";
-  $("resTotal").textContent=fmtL(total);$("resFoot").textContent=fmtL(total);
-  let bestTxt="";if(allClear){const key=`iqa-total-${game.diff}`,prev=parseFloat(store(key));if(!(prev<=total)){store(key,total.toFixed(1));bestTxt="自己ベスト更新！";}else bestTxt=`自己ベスト ${fmtL(prev)}`;}
-  else bestTxt=`パス ${passes} 回（パスがあると自己ベストは記録されません）`;
-  $("resBest").textContent=`${DIFF_JA[game.diff]}　${bestTxt}`;
+  const total=doneTime(),passes=game.results.filter(r=>r.pass).length,allClear=passes===0,hasIQ=HAS_IQ(game.diff);
+  const IQ=hasIQ?computeIQ(game.diff,game.results.map(r=>r.time),game.results.map(r=>r.pass)):null;
+  game.iq=IQ;
+  $("resTitle").textContent=allClear?"全ステージクリア":`パス ${passes} 回`;
+  $("resTotal").textContent=fmtL(total);$("resFoot").textContent=fmtL(total);$("resIqFoot").textContent=IQ?IQ.total:"—";
+  let newBest=false,bestTxt="";if(allClear){const key=`iqa-total-${game.diff}`,prev=parseFloat(store(key));if(!(prev<=total)){store(key,total.toFixed(1));newBest=true;bestTxt="自己ベスト更新！";}else bestTxt=`自己ベスト ${fmtL(prev)}`;}
+  else bestTxt="パスがあると自己ベストは記録されません";
+  let newIqBest=false;if(IQ){const k=`iqa-iq-${game.diff}`,pv=parseInt(store(k));newIqBest=allClear&&!(pv>=IQ.total);if(newIqBest)store(k,String(IQ.total));}
+  $("resBest").textContent=`合計タイム・${DIFF_JA[game.diff]}　${bestTxt}`;
   $("resBody").innerHTML=STAGES.map((s,i)=>{const r=game.results[i];
-    return`<tr><td>STAGE ${i+1}</td><td>${s.name}<br><small style="color:var(--muted)">${s.skill}</small></td><td>${r.pass?`${r.raw.toFixed(1)} 秒 ＋ ${PASS_PENALTY}`:r.summary}</td><td><span class="pill ${r.pass?"ng":"ok"}">${r.pass?"パス":"クリア"}</span></td><td class="t">${fmtL(r.time)}</td></tr>`;}).join("");
-  setupSubmit(allClear);}
+    return`<tr><td>STAGE ${i+1}</td><td>${s.name}<br><small style="color:var(--muted)">${s.skill}</small></td><td>${r.pass?`<span class="pill ng">パス</span> ${r.raw.toFixed(1)}秒＋${PASS_PENALTY}`:r.summary}</td><td class="iq">${!IQ||r.pass?"—":IQ.stageIQ[i]}</td><td class="t">${fmtL(r.time)}</td></tr>`;}).join("");
+  setupSubmit(allClear);updateXLink();
+  const vals=IQ?IQ.stageIQ.map((v,i)=>game.results[i].pass?null:v):null;
+  // 表示の切り替え（IQは「ふつう」だけ）
+  $("iqLabel").textContent=IQ?"総合IQ":`合計タイム（${DIFF_JA[game.diff]}）`;
+  $("iqNum").classList.toggle("time",!IQ);$("resTable").classList.toggle("noiq",!IQ);$("radarBox").hidden=!IQ;$("iqTotalLine").hidden=!IQ;
+  const badgeText=IQ?iqTitle(IQ.total):(newBest?"自己ベスト更新！":DIFF_JA[game.diff]);
+  const pctText=IQ?`${topPct(IQ.total)}${newIqBest?"　IQ自己ベスト！":""}`:`${allClear&&!newBest?bestTxt+"　":""}総合IQは「ふつう」で計測できます`;
+  // 演出
+  revealTimers.forEach(t=>{clearTimeout(t);cancelAnimationFrame(t);});revealTimers=[];
+  const finalState=()=>{revealTimers.forEach(t=>{clearTimeout(t);cancelAnimationFrame(t);});revealTimers=[];
+    $("scan").hidden=true;$("iqHero").hidden=false;$("iqNum").textContent=IQ?IQ.total:fmtL(total);if(IQ)drawRadar(vals,5);
+    $("iqBadge").textContent=badgeText;$("iqBadge").classList.add("on");$("iqPct").textContent=pctText;
+    $("afterReveal").classList.remove("hide");$("skipBtn").hidden=true;revealDone=null;};
+  revealDone=finalState;
+  const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  $("iqBadge").classList.remove("on");$("iqBadge").textContent="";$("iqPct").textContent="";$("iqNum").textContent="?";
+  if(reduce){finalState();return;}
+  $("afterReveal").classList.add("hide");$("skipBtn").hidden=false;$("scan").hidden=false;$("iqHero").hidden=true;
+  const ending=(fire)=>{$("iqBadge").textContent=badgeText;$("iqBadge").classList.add("on");
+    rLater(()=>{$("iqPct").textContent=pctText;if(fire)confetti();
+      rLater(()=>{$("afterReveal").classList.remove("hide");$("skipBtn").hidden=true;revealDone=null;},700);},450);};
+  if(!IQ){rLater(()=>{$("scan").hidden=true;$("iqHero").hidden=false;
+      const t0=performance.now(),ms=1200,step=now=>{const k=Math.min(1,(now-t0)/ms),e=1-Math.pow(1-k,3);$("iqNum").textContent=fmtL(total*e);
+        if(k<1)revealTimers.push(requestAnimationFrame(step));else ending(newBest);};revealTimers.push(requestAnimationFrame(step));},1000);return;}
+  rLater(()=>{$("scan").hidden=true;$("iqHero").hidden=false;drawRadar(vals,0);
+    for(let i=0;i<5;i++)rLater(()=>drawRadar(vals,i+1),300+i*420);
+    rLater(()=>countUp($("iqNum"),60,IQ.total,1500,()=>ending(IQ.total>=120||newIqBest)),300+5*420);
+  },1400);
+}
+
+/* ===== 製作者・ご意見・PR ===== */
+const CREATOR={name:"のびけ",x:"nobi_nobita_fx"};
+/* アフィリエイト（A8.net）。公開サイトでだけ表示する（Claude上のページでは外部画像を読み込めないため） */
+const AFFILIATE=[
+  {href:"https://px.a8.net/svt/ejp?a8mat=3Z2MY2+7DJKAQ+4SM6+626XT",img:"https://www27.a8.net/svt/bgt?aid=240308138446&wid=011&eno=01&mid=s00000022371001018000&mc=1",w:720,h:300,px:"https://www11.a8.net/0.gif?a8mat=3Z2MY2+7DJKAQ+4SM6+626XT"},
+  {href:"https://px.a8.net/svt/ejp?a8mat=3B7J3B+B89K8Y+3ZRU+68U4X",img:"https://www25.a8.net/svt/bgt?aid=200225639679&wid=011&eno=01&mid=s00000018633001049000&mc=1",w:300,h:250,px:"https://www14.a8.net/0.gif?a8mat=3B7J3B+B89K8Y+3ZRU+68U4X"},
+  {href:"https://px.a8.net/svt/ejp?a8mat=3B7J3B+BGLMPU+25B2+61Z81",img:"https://www20.a8.net/svt/bgt?aid=200225639693&wid=011&eno=01&mid=s00000010019001017000&mc=1",w:300,h:250,px:"https://www10.a8.net/0.gif?a8mat=3B7J3B+BGLMPU+25B2+61Z81"},
+  {href:"https://px.a8.net/svt/ejp?a8mat=3B7FYE+CS8B42+1FOU+6BU5T",img:"https://www20.a8.net/svt/bgt?aid=200221574773&wid=011&eno=01&mid=s00000006699001063000&mc=1",w:300,h:250,px:"https://www17.a8.net/0.gif?a8mat=3B7FYE+CS8B42+1FOU+6BU5T"}
+];
+var PR_ON=AFFILIATE.length>0&&location.protocol.startsWith("http")&&!/claude/.test(location.host);
+(function(){if(!PR_ON)return;const box=$("prBox");
+  const t=document.createElement("div");t.className="tag";t.textContent="PR";box.appendChild(t);
+  const wide=document.createElement("div");wide.className="pr-wide";const grid=document.createElement("div");grid.className="pr-grid";
+  AFFILIATE.forEach(a=>{const l=document.createElement("a");l.href=a.href;l.target="_blank";l.rel="nofollow sponsored noopener";
+    const im=document.createElement("img");im.src=a.img;im.width=a.w;im.height=a.h;im.alt="";im.loading="lazy";l.appendChild(im);
+    const px=document.createElement("img");px.src=a.px;px.width=1;px.height=1;px.alt="";px.className="px";
+    const holder=document.createElement("div");holder.className="pr-item";holder.append(l,px);(a.w>=600?wide:grid).appendChild(holder);});
+  box.append(wide,grid);box.hidden=$("scrTitle").hidden&&$("scrResult").hidden;})();
+function siteUrl(){return location.protocol.startsWith("http")&&!/claude/.test(location.host)?location.origin:"";}
+function updateXLink(){const IQ=game.iq,u=siteUrl();
+  const body=`@${CREATOR.x} IQ ARENA（${DIFF_JA[game.diff]}）をプレイ！\n`+(IQ?`総合IQ ${IQ.total}【${iqTitle(IQ.total)}】\n`:"")+`合計 ${fmtL(doneTime())}\n\nご意見・ご要望：\n\n#IQARENA`+(u?`\n${u}`:"");
+  $("xBtn").href="https://x.com/intent/post?text="+encodeURIComponent(body);}
+$("skipBtn").onclick=()=>{if(revealDone)revealDone();};
+$("copyBtn").onclick=async()=>{const IQ=game.iq;
+  const head=IQ?`総合IQ ${IQ.total}【${iqTitle(IQ.total)}】${topPct(IQ.total)}\n${ABIL.map((a,i)=>`${a} ${game.results[i].pass?"—":IQ.stageIQ[i]}`).join(" / ")}\n`:"";
+  const txt=`IQ ARENA（${DIFF_JA[game.diff]}）\n${head}合計 ${fmtL(doneTime())}`+(location.protocol.startsWith("http")&&!/claude/.test(location.host)?`\n${location.origin}`:"");
+  try{await navigator.clipboard.writeText(txt);$("copySt").textContent="コピーしました";}catch(e){$("copySt").textContent=txt.replace(/\n/g,"　");}};
 $("againNew").onclick=()=>startGame();
 $("toTitle").onclick=()=>{drawDiff();show("scrTitle");showTitleRank();};
 
@@ -1007,10 +1222,12 @@ function drawRank(listEl,rows){listEl.innerHTML="";
     const li=document.createElement("li");if(r.is_me)li.className="me";
     const rk=document.createElement("span");rk.className="rk";rk.textContent=r.rank+"位";
     const nm=document.createElement("span");nm.className="nm";nm.textContent=r.nickname;if(r.is_me){const y=document.createElement("small");y.textContent="あなた";nm.appendChild(y);}
-    const tm=document.createElement("span");tm.className="tm";tm.textContent=fmtL(r.total_ms/1000);
+    const tm=document.createElement("span");tm.className="tm";
+    if(HAS_IQ(listEl.dataset.diff||game.diff)&&Array.isArray(r.stage_ms)&&r.stage_ms.length===5){const iq=computeIQ(listEl.dataset.diff||game.diff,r.stage_ms.map(x=>x/1000)).total;const q=document.createElement("span");q.className="iqc";q.textContent="IQ "+iq;tm.appendChild(q);}
+    tm.appendChild(document.createTextNode(fmtL(r.total_ms/1000)));
     li.append(rk,nm,tm);listEl.appendChild(li);});}
 async function loadRank(diff,listEl){
-  if(!RANK_ON)return;listEl.innerHTML=`<div class="empty">読み込み中…</div>`;
+  if(!RANK_ON)return;listEl.dataset.diff=diff;listEl.innerHTML=`<div class="empty">読み込み中…</div>`;
   try{const rows=await rpc("iqa_leaderboard",{p_difficulty:diff,p_player:playerId(),p_limit:20});drawRank(listEl,rows||[]);}
   catch(e){listEl.innerHTML=`<div class="empty">ランキングを読み込めませんでした。時間をおいて開き直してください。</div>`;}}
 let rankDiff="normal";
@@ -1028,7 +1245,7 @@ $("submitBtn").onclick=async()=>{
   if(!nick||nick.length>12){st.textContent=SUBMIT_ERR.nickname_length;st.className="st ng";inp.focus();return;}
   btn.disabled=true;st.textContent="登録中…";st.className="st";
   try{const r=await rpc("iqa_submit_score",{p_player:playerId(),p_nickname:nick,p_difficulty:game.diff,
-      p_stage_ms:game.results.map(x=>Math.round(x.time*1000)),p_code:codeOf()});
+      p_stage_ms:game.results.map(x=>Math.max(2000,Math.round(x.time*1000))),p_code:codeOf()});
     submitted=true;store("iqa-nick",nick);inp.disabled=true;
     const beat=r.best_ms===r.total_ms;
     st.textContent=`登録しました。${beat?"自己ベストで":"自己ベスト "+fmtL(r.best_ms/1000)+" で"} ${r.rank}位 / ${r.players}人中`;st.className="st ok";
