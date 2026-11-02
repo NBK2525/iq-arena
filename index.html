@@ -251,11 +251,12 @@ header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-betw
 .site-foot a{color:var(--accent);font-weight:700;text-decoration:none}
 .site-foot a:hover{text-decoration:underline}
 .site-foot .maker b{color:var(--ink)}
-.site-foot .pr{flex-basis:100%;display:flex;flex-direction:column;gap:10px;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-.site-foot .pr .tag{font:700 10px var(--f-display);letter-spacing:.12em;border:1px solid var(--line);border-radius:4px;padding:1px 6px}
-.pr-wide,.pr-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
+.pr{display:flex;flex-direction:column;gap:8px;align-items:center}
+.pr .tag{font:700 10px var(--f-display);letter-spacing:.12em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.pr-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
 .pr-item{max-width:100%;line-height:0}
 .pr-item img{max-width:100%;height:auto;border-radius:6px}
+.pr-top .pr-item img{max-height:220px;width:auto}
 .pr-item img.px{position:absolute;width:1px;height:1px;opacity:0}
 a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .btn.x{background:var(--ink);color:var(--board);border-color:var(--ink)}
@@ -287,6 +288,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 
 
 <div class="wrap">
+  <aside class="pr pr-top" id="prTop" aria-label="広告" hidden></aside>
   <header id="hdr" hidden>
     <div class="logo">IQ <span>ARENA</span></div>
     <div class="track" id="track"></div>
@@ -388,6 +390,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
     </div>
     </div>
   </section>
+  <aside class="pr pr-bottom" id="prBottom" aria-label="広告" hidden></aside>
   <footer class="site-foot" id="siteFoot">
     <section class="maker-card" aria-labelledby="makerH">
       <div class="maker-avatar" aria-hidden="true"><span>のびけ</span></div>
@@ -399,7 +402,6 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
         <div class="maker-name">製作：のびけ</div>
       </div>
     </section>
-    <div class="pr" id="prBox" hidden></div>
   </footer>
 </div>
 
@@ -1000,7 +1002,7 @@ const STAGES=[S1,S2,S3,S4,S5];
 
 
 /* ===== 画面の切り替え ===== */
-function show(id){["scrTitle","scrIntro","scrPlay","scrResult"].forEach(s=>$(s).hidden=s!==id);$("siteFoot").hidden=!(id==="scrTitle"||id==="scrResult");if(typeof PR_ON!=="undefined")$("prBox").hidden=!PR_ON||!(id==="scrTitle"||id==="scrResult");$("hdr").hidden=id==="scrTitle";window.scrollTo({top:0});}
+function show(id){["scrTitle","scrIntro","scrPlay","scrResult"].forEach(s=>$(s).hidden=s!==id);$("hdr").hidden=id==="scrTitle";window.scrollTo({top:0});}
 function setPhase(h){$("phase").innerHTML=h;}
 function setMsg(t,cls){const m=$("msg");m.textContent=t||"";m.className="msg"+(cls?" "+cls:"");}
 function setStat(k,v){$("statK").textContent=k;$("statV").innerHTML=v;}
@@ -1181,14 +1183,16 @@ const AFFILIATE=[
   {href:"https://px.a8.net/svt/ejp?a8mat=3B7FYE+CS8B42+1FOU+6BU5T",img:"https://www20.a8.net/svt/bgt?aid=200221574773&wid=011&eno=01&mid=s00000006699001063000&mc=1",w:300,h:250,px:"https://www17.a8.net/0.gif?a8mat=3B7FYE+CS8B42+1FOU+6BU5T"}
 ];
 var PR_ON=AFFILIATE.length>0&&location.protocol.startsWith("http")&&!/claude/.test(location.host);
-(function(){if(!PR_ON)return;const box=$("prBox");
-  const t=document.createElement("div");t.className="tag";t.textContent="PR";box.appendChild(t);
-  const wide=document.createElement("div");wide.className="pr-wide";const grid=document.createElement("div");grid.className="pr-grid";
-  AFFILIATE.forEach(a=>{const l=document.createElement("a");l.href=a.href;l.target="_blank";l.rel="nofollow sponsored noopener";
-    const im=document.createElement("img");im.src=a.img;im.width=a.w;im.height=a.h;im.alt="";im.loading="lazy";l.appendChild(im);
+(function(){if(!PR_ON)return;
+  const item=a=>{const l=document.createElement("a");l.href=a.href;l.target="_blank";l.rel="nofollow sponsored noopener";
+    const im=document.createElement("img");im.src=a.img;im.width=a.w;im.height=a.h;im.alt="";l.appendChild(im);
     const px=document.createElement("img");px.src=a.px;px.width=1;px.height=1;px.alt="";px.className="px";
-    const holder=document.createElement("div");holder.className="pr-item";holder.append(l,px);(a.w>=600?wide:grid).appendChild(holder);});
-  box.append(wide,grid);box.hidden=$("scrTitle").hidden&&$("scrResult").hidden;})();
+    const h=document.createElement("div");h.className="pr-item";h.append(l,px);return h;};
+  const fill=(box,list)=>{const t=document.createElement("div");t.className="tag";t.textContent="PR";const row=document.createElement("div");row.className="pr-row";
+    list.forEach(a=>row.appendChild(item(a)));box.append(t,row);box.hidden=false;};
+  /* 上：横長バナー、下：300×250 の3つ */
+  fill($("prTop"),AFFILIATE.filter(a=>a.w>=600));
+  fill($("prBottom"),AFFILIATE.filter(a=>a.w<600));})();
 function siteUrl(){return location.protocol.startsWith("http")&&!/claude/.test(location.host)?location.origin:"";}
 function updateXLink(){const IQ=game.iq,u=siteUrl();
   const body=`@${CREATOR.x} IQ ARENA（${DIFF_JA[game.diff]}）をプレイ！\n`+(IQ?`総合IQ ${IQ.total}【${iqTitle(IQ.total)}】\n`:"")+`合計 ${fmtL(doneTime())}\n\nご意見・ご要望：\n\n#IQARENA`+(u?`\n${u}`:"");
